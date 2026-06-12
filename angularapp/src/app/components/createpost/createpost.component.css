@@ -158,6 +158,76 @@
   background-color: #e0e0e0;
 }
 
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 22px rgba(35, 50, 70, 0.08);
+}
+
+.alert-warning {
+  background: linear-gradient(180deg, #fff5e5 0%, #fff7eb 100%);
+  border-color: #ffd8a8;
+  color: #7c4a00;
+}
+
+.alert-danger {
+  background: linear-gradient(180deg, #ffe6ea 0%, #fff1f3 100%);
+  border-color: #f8a1b2;
+  color: #7f1d24;
+}
+
+.warning-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.warning-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.warning-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.secondary-btn,
+.danger-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondary-btn {
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #7c4a00;
+}
+
+.secondary-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.danger-btn {
+  background-color: #7c4a00;
+  color: white;
+}
+
+.danger-btn:hover {
+  background-color: #633f03;
+}
+
 .story-content-wrapper {
   position: relative;
 }

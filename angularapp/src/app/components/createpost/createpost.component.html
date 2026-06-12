@@ -29,6 +29,21 @@
         </div>
       </div>
 
+      <div *ngIf="warningMessage" class="alert alert-warning">
+        <span class="warning-icon">⚠️</span>
+        <div class="warning-copy">
+          <p>{{ warningMessage }}</p>
+          <div class="warning-actions">
+            <button type="button" class="secondary-btn" (click)="dismissWarning()">
+              Review content
+            </button>
+            <button type="button" class="danger-btn" (click)="publishAnyway()">
+              Publish anyway
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div *ngIf="errorMessage" class="alert alert-danger">
         {{ errorMessage }}
       </div>

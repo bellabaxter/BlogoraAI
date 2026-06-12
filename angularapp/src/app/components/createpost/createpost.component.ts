@@ -28,6 +28,8 @@ export class CreatepostComponent implements OnInit {
   cat: string[] = ['Technology', 'Health', 'Travel', 'Education', 'Food'];
   isUpdateMode: boolean = false;
   errorMessage: string | null = null;
+  warningMessage: string | null = null;
+  offensiveBypassConfirmed = false;
   selectedFileName: string = '';
 
   post: Post = {
@@ -113,6 +115,8 @@ export class CreatepostComponent implements OnInit {
   }
 
   async createOrUpdatePost(): Promise<void> {
+    this.warningMessage = null;
+
     if (!this.postForm.valid) {
       return; // Safety guard: don't submit if form is invalid
     }
@@ -120,18 +124,18 @@ export class CreatepostComponent implements OnInit {
     const title = this.postForm.get('title')?.value || '';
     const content = this.postForm.get('content')?.value || '';
 
-    // Check moderation with Gemini
-    const isOffensive = await this.checkModerationWithGemini(title, content);
+    if (!this.offensiveBypassConfirmed) {
+      const isOffensive = await this.checkModerationWithGemini(title, content);
 
-    if (isOffensive) {
-      const proceed = confirm(
-        'Warning: Gemini detected potentially offensive words in your post. Do you still want to publish it?',
-      );
-      if (!proceed) {
+      if (isOffensive) {
+        this.warningMessage =
+          'Gemini detected potentially offensive content in your post. Please review it carefully before publishing.';
         return;
       }
     }
 
+    this.warningMessage = null;
+    this.offensiveBypassConfirmed = false;
     this.post = this.postForm.value;
     if (this.isUpdateMode) {
       this.postService.updatePost(this.postId, this.post).subscribe(() => {
@@ -142,6 +146,16 @@ export class CreatepostComponent implements OnInit {
         this.router.navigate(['/my-post']);
       });
     }
+  }
+
+  publishAnyway(): Promise<void> {
+    this.offensiveBypassConfirmed = true;
+    return this.createOrUpdatePost();
+  }
+
+  dismissWarning(): void {
+    this.warningMessage = null;
+    this.offensiveBypassConfirmed = false;
   }
 
   cancel(): void {
