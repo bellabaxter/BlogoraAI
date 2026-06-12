@@ -1,0 +1,83 @@
+<div class="view-wrapper">
+  <!-- Hero Section -->
+  <div class="post-hero" [style.backgroundImage]="'url(' + (post?.img || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643') + ')'">
+    <div class="hero-overlay"></div>
+  </div>
+
+  <div class="post-container" *ngIf="post">
+    <!-- Header Card -->
+    <div class="post-header-card">
+      <div class="category-badge">{{ post.cat }}</div>
+      <h1 class="post-title">{{ post.title }}</h1>
+      <div class="post-meta">
+        <div class="author-info">
+          <div class="avatar">{{ post.user.name.charAt(0) | uppercase }}</div>
+          <span class="author-name">By {{ post.user.name }}</span>
+        </div>
+        <span class="post-date">{{ post.createdAt | date:'longDate' }}</span>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="post-content">
+      <div [innerHTML]="post.content"></div>
+    </div>
+
+    <!-- Actions (Only for author) -->
+    <div class="post-actions-panel" *ngIf="post.user.name === getUserName()">
+      <h3>Manage Post</h3>
+      <div class="action-buttons">
+        <button (click)="editPost()" class="btn-edit">
+          <i>✎</i> Edit Story
+        </button>
+        <button (click)="openDeleteModal()" class="btn-delete">
+          <i>🗑</i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!post" class="loading-state">
+    <div class="pulse-loader"></div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+<div class="modal-backdrop" *ngIf="showDeleteModal" (click)="closeDeleteModal()">
+  <div class="modal-box" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+ 
+    <div class="modal-icon-wrap">
+      <div class="modal-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+          <path d="M10 11v6"></path>
+          <path d="M14 11v6"></path>
+          <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+        </svg>
+      </div>
+    </div>
+ 
+    <h2 id="modal-title" class="modal-title">Delete Post</h2>
+    <p class="modal-message">
+      Are you sure you want to delete
+      <strong>"{{ post?.title }}"</strong>?
+      This action cannot be undone.
+    </p>
+ 
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="closeDeleteModal()" [disabled]="isDeleting">
+        Cancel
+      </button>
+      <button class="btn-confirm-delete" (click)="confirmDelete()" [disabled]="isDeleting">
+        <span *ngIf="!isDeleting">Delete Post</span>
+        <span *ngIf="isDeleting" class="spinner-wrap">
+          <span class="spinner"></span>
+          Deleting...
+        </span>
+      </button>
+    </div>
+ 
+  </div>
+</div>
+</div>

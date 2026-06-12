@@ -1,0 +1,17 @@
+<div class="rich-editor-wrapper">
+  <div class="toolbar" [class.disabled]="isDisabled">
+    <button type="button" class="tool-btn bold" (click)="format('bold')" title="Bold">B</button>
+    <button type="button" class="tool-btn italic" (click)="format('italic')" title="Italic">I</button>
+    <button type="button" class="tool-btn underline" (click)="format('underline')" title="Underline">U</button>
+    <div class="divider"></div>
+    <button type="button" class="tool-btn" (click)="formatBlock('H1')" title="Heading 1"><b>H1</b></button>
+    <button type="button" class="tool-btn" (click)="formatBlock('H2')" title="Heading 2"><b>H2</b></button>
+    <button type="button" class="tool-btn bullet" (click)="format('insertUnorderedList')" title="Bullet List">•
+      List</button>
+    <div class="divider"></div>
+    <button type="button" class="tool-btn blockquote" (click)="formatBlock('BLOCKQUOTE')" title="Quote">"</button>
+  </div>
+  <div class="editor-area" #editorArea [attr.contenteditable]="!isDisabled" (input)="onInput()" (blur)="onBlur()"
+    placeholder="Write your blog...">
+  </div>
+</div>

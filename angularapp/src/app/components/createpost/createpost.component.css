@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Roboto:wght@400;500;700&display=swap');
+
+.editor-layout {
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  padding-bottom: 5rem;
+}
+
+.editor {
+  min-height: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #000;
+  margin-right: 0.5rem;
+}
+
+.status-text {
+  font-size: 0.9rem;
+  color: #757575;
+}
+
+.status-saved {
+  font-size: 0.9rem;
+  color: #bdbdbd;
+}
+
+.header-right {
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.publish-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 99px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.publish-btn:disabled {
+  background-color: #525552;
+  cursor: not-allowed;
+}
+
+.cancel-btn {
+  background-color: transparent;
+  color: #757575;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  color: #292929;
+}
+
+.editor-container {
+  max-width: 740px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.story-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.story-title {
+  border: none;
+  outline: none;
+  font-family: 'Lora', serif;
+  font-size: 3rem;
+  color: #292929;
+  margin-bottom: 1rem;
+  background: transparent;
+}
+
+.story-title::placeholder {
+  color: #b3b3b1;
+}
+
+.meta-inputs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.meta-inputs:focus-within,
+.meta-inputs:hover {
+  opacity: 1;
+}
+
+.story-meta {
+  border: none;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  color: #292929;
+  padding: 0.5rem 0;
+  background: transparent;
+}
+
+.file-upload-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.file-upload-btn {
+  background-color: #f5f5f5;
+  color: #292929;
+  padding: 0.5rem 1rem;
+  border-radius: 99px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.file-upload-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.story-content-wrapper {
+  position: relative;
+}
+
+::ng-deep .ql-editor {
+  padding: 1rem 0 !important;
+  min-height: 50vh;
+  font-family: 'Lora', serif;
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: #292929;
+}
+
+::ng-deep .ql-editor.ql-blank::before {
+  left: 0 !important;
+  font-style: normal !important;
+  color: #b3b3b1 !important;
+  font-family: 'Lora', serif;
+}
+
+::ng-deep .ql-bubble .ql-tooltip {
+  background-color: #292929 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+::ng-deep .ql-bubble .ql-tooltip-arrow {
+  border-bottom-color: #292929 !important;
+  border-top-color: #292929 !important;
+}

@@ -1,0 +1,11 @@
+# Ignore log files
+*.log
+
+target/
+*.class
+*.jar
+*.war
+
+# Ignore other directories or files
+.DS_Store
+.env

@@ -1,0 +1,59 @@
+<nav class="navbar">
+  <div class="navbar__container">
+    <!-- Logo/Brand -->
+    <div class="navbar__brand">
+      <a routerLink="/" class="navbar__logo">
+        <span class="navbar__logo-text">Mindful Muses</span>
+      </a>
+    </div>
+
+    <!-- Hamburger Menu for Mobile -->
+    <button class="navbar__hamburger" (click)="toggleMobileMenu()">
+      <span class="navbar__hamburger-line"></span>
+      <span class="navbar__hamburger-line"></span>
+      <span class="navbar__hamburger-line"></span>
+    </button>
+
+    <!-- Navigation Menu -->
+    <ul class="navbar__menu" [class.navbar__menu--active]="mobileMenuOpen">
+
+      <!-- Main Links -->
+      <li class="navbar__item">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="navbar__link"
+          (click)="closeMobileMenu()">
+          Home
+        </a>
+      </li>
+
+      <li class="navbar__item">
+        <a routerLink="/my-post" paramMap routerLinkActive="active" class="navbar__link" (click)="closeMobileMenu()">
+          My Posts
+        </a>
+      </li>
+
+      <li class="navbar__item">
+        <a routerLink="/createpost" routerLinkActive="active" class="navbar__link" (click)="closeMobileMenu()">
+          Write
+        </a>
+      </li>
+
+      
+      <!-- Divider -->
+      <li class="navbar__divider"></li>
+
+      <!-- User Section -->
+      <li class="navbar__item navbar__user-section">
+        <span class="navbar__username">
+          {{ user || 'Guest' }}
+        </span>
+      </li>
+
+      <!-- Logout Button -->
+      <li class="navbar__item">
+        <button class="navbar__logout-btn" (click)="logout()">
+          Sign Out
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>

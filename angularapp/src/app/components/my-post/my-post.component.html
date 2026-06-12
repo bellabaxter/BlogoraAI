@@ -1,0 +1,37 @@
+<div class="my-posts-container">
+    <div class="header">
+        <h1>My Posts</h1>
+        <p>Manage your blog posts</p>
+    </div>
+
+    <div class="posts-grid">
+        <div *ngIf="posts.length >0; else noPosts">
+            <div *ngFor="let post of posts" class="post-card" [routerLink]="['/view-post', post.id]"
+                style="cursor:pointer;">
+                <div class="post-image" *ngIf="post.img">
+                    <img [src]="post.img" [alt]="post.title" />
+                </div>
+                <div class="post-image post-image--placeholder" *ngIf="!post.img">
+                    <span>No Image</span>
+                </div>
+                <div class="post-content">
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    <p class="post-excerpt">{{ getExcerpt(post.content)}}</p>
+                    <div class="post-meta">
+                        <span class="post-date">{{ post.createdAt | date:'mediumDate'}}</span>
+                        <span class="post-category">{{ post.cat }}</span>
+                    </div>
+                    <a class="read-btn" routerLink="/view-post/{{ post.id }}">Manage Post</a>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #noPosts>
+            <div class="post_empty">
+                <p>No posts available yet. </p>
+                <a routerLink="/createpost" class="btn-create-post">Write Your First Post</a>
+            </div>
+        </ng-template>
+
+    </div>
+</div>

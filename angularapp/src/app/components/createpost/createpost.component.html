@@ -1,0 +1,42 @@
+<div class="editor-layout">
+  <form [formGroup]="postForm" (ngSubmit)="createOrUpdatePost()" class="story-form">
+    <!-- Top Navbar -->
+    <header class="editor-header">
+      <div class="header-right">
+        <button type="submit" class="publish-btn" [disabled]="!postForm.valid">
+          {{ isUpdateMode ? 'Update' : 'Publish' }}
+        </button>
+        <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+      </div>
+    </header>
+
+    <!-- Editor Container -->
+    <main class="editor-container"> 
+      <!-- Title -->
+      <input type="text" formControlName="title" class="story-title" placeholder="Title" required />
+
+      <!-- Category & Image -->
+      <div class="meta-inputs">
+        <select formControlName="cat" class="story-meta" required>
+          <option value="" disabled selected hidden>Category</option>
+          <option *ngFor="let category of cat" [value]="category">{{ category }}</option>
+        </select>
+        <div class="file-upload-wrapper">
+          <label class="file-upload-btn">
+            <span class="icon">📷</span> {{ selectedFileName || (isUpdateMode ? 'Change Cover Image' : 'Add Cover Image') }}
+            <input type="file" accept="image/png, image/jpeg, image/webp" (change)="onImageSelected($event)" hidden />
+          </label>
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Editor -->
+      <div class="story-content-wrapper">
+        <app-rich-text-editor formControlName="content"></app-rich-text-editor>
+      </div>
+    </main>
+  </form>
+</div>

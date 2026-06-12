@@ -1,0 +1,66 @@
+<div class="home-posts">
+  <div class="search-toolbar">
+    <div class="search-box">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search by keyword..." />
+    </div>
+    <div class="category-dropdown">
+      <select [(ngModel)]="selectedCategory">
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <section class="home-posts__header">
+    <h1>Latest Posts</h1>
+    <p>Discover the newest articles from the blog.</p>
+  </section>
+
+  <div class="home-posts__grid" *ngIf="filteredPosts().length; else emptyState">
+
+    <div class="post-card" *ngFor="let post of filteredPosts()" [routerLink]="['/view-post', post.id]"
+      style="cursor:pointer;">
+
+      <div class="post-card__image" *ngIf="post.img">
+        <img [src]="post.img" [alt]="post.title" />
+      </div>
+
+      <div class="post-card__content">
+        <h2 class="post-card__title">{{ post.title }}</h2>
+
+        <p class="post-card__excerpt">
+          {{ getExcerpt(post.content) }}
+        </p>
+
+        <div class="post-card__meta">
+          <span class="post-card__date">
+            {{ post.createdAt | date:'mediumDate' }}
+          </span>
+          <span class="post-card__category">
+            {{ post.cat }}
+          </span>
+        </div>
+
+        <div class="post-card__footer">
+          <span class="author-name">By {{ post.user.name }}</span>
+          <a class="post-card__read-more">Read Post</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- EMPTY / NO RESULTS -->
+  <ng-template #emptyState>
+    <div class="home-posts__empty">
+      <p *ngIf="searchTerm; else noPosts">
+        No results found for "{{ searchTerm }}"
+      </p>
+
+      <ng-template #noPosts>
+        <p>No posts available yet. Please check back later.</p>
+      </ng-template>
+    </div>
+  </ng-template>
+</div>
