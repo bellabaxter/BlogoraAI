@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CreatepostComponent } from './components/createpost/createpost.component';
 import { ViewPostComponent } from './components/view-post/view-post.component';
 import { MyPostComponent } from './components/my-post/my-post.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,5 +14,6 @@ export const routes: Routes = [
   { path: 'createpost', component: CreatepostComponent },
   { path: 'edit-post/:id', component: CreatepostComponent },
   { path: 'view-post/:id', component: ViewPostComponent },
-  { path: 'my-post', component: MyPostComponent }
+  { path: 'my-post', component: MyPostComponent },
+  { path: 'analytics/:id', component: AnalyticsComponent }
 ];

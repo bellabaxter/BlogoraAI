@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Post } from '../../models/post.model';
 import { PostService } from '../../services/post.service';
 import { AuthService } from '../../services/auth.service';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-view-post',
@@ -22,7 +23,8 @@ export class ViewPostComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private postService: PostService,
-    private authService: AuthService
+    private authService: AuthService,
+    private analyticsService: AnalyticsService
   ) { }
 
   ngOnInit(): void {
@@ -36,15 +38,21 @@ export class ViewPostComponent implements OnInit {
   }
 
   loadPost(id: number): void {
-    this.postService.getPostById(id).subscribe({
-      next: (data) => {
-        this.post = data;
-      },
-      error: (err) => {
-        console.error('Error fetching post:', err);
+  this.postService.getPostById(id).subscribe({
+    next: (data) => {
+      this.post = data;
+
+      // ✅ Now post is loaded, so we can safely check the author
+      const currentUser = this.authService.getUserName();
+      if (currentUser !== this.post?.user.name) {
+        this.analyticsService.recordView(id).subscribe();
       }
-    });
-  }
+    },
+    error: (err) => {
+      console.error('Error fetching post:', err);
+    }
+  });
+}
 
   getUserName(): string | null {
     return this.authService.getUserName();
@@ -53,6 +61,12 @@ export class ViewPostComponent implements OnInit {
   editPost(): void {
     if (this.postId) {
       this.router.navigate(['/edit-post', this.postId]);
+    }
+  }
+
+  recordView(): void {
+    if (this.postId) {
+      this.router.navigate(['/analytics', this.postId]);
     }
   }
 

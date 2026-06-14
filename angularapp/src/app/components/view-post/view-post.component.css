@@ -144,7 +144,7 @@
   gap: 1rem;
 }
 
-.btn-edit, .btn-delete {
+.btn-edit, .btn-delete, .btn-view {
   padding: 0.85rem 2rem;
   border-radius: 12px;
   font-family: 'Outfit', sans-serif;
@@ -175,6 +175,16 @@
 
 .btn-delete:hover {
   background: #fee2e2;
+  transform: translateY(-2px);
+}
+
+.btn-view {
+  background: #f1f0cd;
+  color: #fcc100e6;
+}
+
+.btn-view:hover {
+  background: #f3f5ca;
   transform: translateY(-2px);
 }
 

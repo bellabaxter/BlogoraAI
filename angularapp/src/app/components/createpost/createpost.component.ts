@@ -129,7 +129,7 @@ export class CreatepostComponent implements OnInit {
 
       if (isOffensive) {
         this.warningMessage =
-          'Gemini detected potentially offensive content in your post. Please review it carefully before publishing.';
+          'Detected potentially offensive content in your post. Please review it carefully before publishing.';
         return;
       }
     }
